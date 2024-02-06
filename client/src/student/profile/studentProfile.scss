@@ -1,0 +1,13 @@
+.studentProfile {
+    width: 100%;
+    display: flex;
+  
+    .studentProfileContainer {
+      flex: 6;
+
+      .profile{
+        padding: 10px;
+      }
+    }
+  }
+  

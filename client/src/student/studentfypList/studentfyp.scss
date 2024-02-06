@@ -1,0 +1,51 @@
+.stdRequestList {
+  display: flex;
+  width: 100%;
+
+  .stdRequestListContainer {
+    flex: 6;
+
+    .details {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: green;
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+
+      &:hover {
+        background-color: green;
+        color: white;
+      }
+    }
+    .request {
+      padding: 2px 5px;
+      border-radius: 5px;
+      color: rgb(142, 47, 13);
+      border: 1px dotted rgba(0, 0, 139, 0.596);
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(142, 47, 13);
+        color: white;
+      }
+    }
+    .cellWithStatus {
+      padding: 5px;
+      border-radius: 5px;
+
+      &.disponible {
+        background-color: rgba(0, 128, 0, 0.05);
+        color: blue;
+      }
+
+      &.pris {
+        background-color: rgba(255, 217, 0, 0.05);
+        color: goldenrod;
+      }
+      &.fermé {
+        background-color: rgba(255, 0, 0, 0.05);
+        color: crimson;
+      }
+    }
+  }
+}

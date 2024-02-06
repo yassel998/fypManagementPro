@@ -1,0 +1,131 @@
+.profile {
+  .user {
+    display: flex;
+    margin-top: 20px;
+
+    .userShow {
+      flex: 1;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      padding: 13px;
+
+      .userShowTop {
+        display: flex;
+        align-items: center;
+
+        .userShowImg {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .userShowTopTitle {
+          display: flex;
+          flex-direction: column;
+          margin-left: 20px;
+
+          .userShowUsername {
+            font-weight: 600;
+          }
+
+          .userShowUserTitle {
+            font-weight: 300;
+          }
+        }
+      }
+
+      .userShowBottom {
+        margin-top: 20px;
+
+        .userShowTitle {
+          font-size: 14px;
+          font-weight: 600;
+          color: rgb(175, 170, 170);
+        }
+
+        .userShowInfo {
+          display: flex;
+          align-items: center;
+          margin: 15px 5px;
+          color: #444;
+        }
+
+        .userShowIcon {
+          font-size: 18px !important;
+        }
+
+        .userShowInfoTitle {
+          margin-left: 10px;
+        }
+      }
+    }
+
+    .userUpdate {
+      flex: 2;
+      -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+      box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+      display: flex;
+      padding: 15px;
+
+      .left {
+        flex: 1;
+        text-align: center;
+        img {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .right {
+        flex: 4;
+
+        form {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 30px;
+          justify-content: space-around;
+
+          .formInput {
+            width: 40%;
+
+            label {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+
+              .icon {
+                cursor: pointer;
+              }
+            }
+
+            input {
+              width: 100%;
+              padding: 5px;
+              border: none;
+              border-bottom: 1px solid gray;
+            }
+          }
+
+          button {
+            width: 150px;
+            padding: 10px;
+            border: none;
+            background-color: rgb(142, 47, 13);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+
+            &:hover {
+              color: rgb(142, 47, 13);
+              background-color: rgb(225, 198, 190);
+            }
+          }
+        }
+      }
+    }
+  }
+}

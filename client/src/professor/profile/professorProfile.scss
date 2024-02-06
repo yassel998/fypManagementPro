@@ -1,0 +1,13 @@
+.professorProfile {
+    width: 100%;
+    display: flex;
+  
+    .professorProfileContainer {
+      flex: 6;
+
+      .profile{
+        padding: 10px;
+      }
+    }
+  }
+  

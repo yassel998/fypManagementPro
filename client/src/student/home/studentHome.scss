@@ -1,0 +1,17 @@
+.studentHome {
+  display: flex;
+  .homeContainer {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center; /* Center the text horizontally */
+      height: 100%;
+      font-size: 3d4px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.stdRequestList {
+  display: flex;
+  width: 100%;
+
+  .stdRequestListContainer {
+    flex: 6;
+
+    .cellWithStatus {
+      padding: 5px;
+      border-radius: 5px;
+
+      &.en-cours {
+        background-color: rgba(0, 128, 0, 0.05);
+        color: blue;
+      }
+      &.accepté {
+        background-color: rgba(0, 128, 0, 0.05);
+        color: green;
+      }
+      &.en-attente {
+        background-color: rgba(255, 217, 0, 0.05);
+        color: goldenrod;
+      }
+      &.rejeté {
+        background-color: rgba(255, 0, 0, 0.05);
+        color: crimson;
+      }
+    }
+  }
+}
