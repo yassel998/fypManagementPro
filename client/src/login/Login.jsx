@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
 
 const Login = () => {
@@ -13,7 +13,7 @@ const Login = () => {
 
   const [err, setError] = useState(null);
 
-  const { login } = useContext(AuthContext);
+  const { currentUser, login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -25,11 +25,32 @@ const Login = () => {
     e.preventDefault();
     try {
       await login(inputs);
-      navigate("/student");
     } catch (err) {
       setError(err.response.data);
     }
   };
+
+  //This useEffect will run whenever currentUser changes
+  //navigate based on the updated currentUser state
+  useEffect(() => {
+    if (currentUser) {
+      // Make sure currentUser is not null
+      switch (currentUser.role) {
+        case 0:
+          navigate("/supervisor");
+          break;
+        case 1:
+          navigate("/headOfDepartment");
+          break;
+        case 2:
+          navigate("/professor");
+          break;
+        case 3:
+        default:
+          navigate("/student");
+      }
+    }
+  }, [currentUser, navigate]);
 
   return (
     <div className="login">

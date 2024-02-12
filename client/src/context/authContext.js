@@ -12,7 +12,6 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-
   const login = async (inputs) => {
     const res = await axios.post("/auth/login", inputs);
     setCurrentUser(res.data);

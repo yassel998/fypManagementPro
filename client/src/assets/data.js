@@ -1,5 +1,4 @@
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
-import LogoutIcon from "@mui/icons-material/Logout";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SchoolIcon from "@mui/icons-material/School";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -11,7 +10,7 @@ import AddTaskIcon from "@mui/icons-material/AddTask";
 import PasswordIcon from "@mui/icons-material/Password";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
-import GroupIcon from '@mui/icons-material/Group';
+import GroupIcon from "@mui/icons-material/Group";
 
 //sidebar
 export const menu = {
@@ -63,13 +62,7 @@ export const menu = {
     },
     {
       title: "UTILISATEUR",
-      listItems: [
-        {
-          title: "Se déconnecte",
-          url: "/",
-          icon: LogoutIcon,
-        },
-      ],
+      listItems: [],
     },
   ],
   student: [
@@ -121,11 +114,6 @@ export const menu = {
           url: "/student/password",
           icon: PasswordIcon,
         },
-        // {
-        //   title: "Se déconnecte",
-        //   url: "/",
-        //   icon: LogoutIcon,
-        // },
       ],
     },
   ],
@@ -177,11 +165,6 @@ export const menu = {
           title: "Changer le mdp",
           url: "/professor/password",
           icon: PasswordIcon,
-        },
-        {
-          title: "Se déconnecte",
-          url: "/",
-          icon: LogoutIcon,
         },
       ],
     },
@@ -239,11 +222,6 @@ export const menu = {
           title: "Changer le mdp",
           url: "/professor/password",
           icon: PasswordIcon,
-        },
-        {
-          title: "Se déconnecte",
-          url: "/",
-          icon: LogoutIcon,
         },
       ],
     },
