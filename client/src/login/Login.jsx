@@ -34,7 +34,6 @@ const Login = () => {
   //navigate based on the updated currentUser state
   useEffect(() => {
     if (currentUser) {
-      // Make sure currentUser is not null
       switch (currentUser.role) {
         case 0:
           navigate("/supervisor");

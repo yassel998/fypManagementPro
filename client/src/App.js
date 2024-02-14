@@ -21,6 +21,7 @@ import PasswordProf from "./professor/changePassword/PasswordProf";
 import HoDMyFyp from "./headOfDepartment/myFyp/HoDMyFyp";
 import HoDnewFyp from "./headOfDepartment/newFyp/HoDnewFyp";
 import HoDrequests from "./headOfDepartment/requests/HoDrequests";
+import PrivateRoute from "./assets/PrivateRoute";
 
 function App() {
   return (
@@ -33,20 +34,23 @@ function App() {
           <Route path="/register">
             <Route index element={<Register />} />
           </Route>
-          <Route path="/supervisor">
+          <Route path="/supervisor" element={<PrivateRoute allowedRole={0} />}>
             <Route index element={<AdminHome />} />
             <Route path="headOfDeptList" element={<HeadOfDeptList />} />
             <Route path="profList" element={<ProfList />} />
             <Route path="studentList" element={<StudnetList />} />
             <Route path="requestList" element={<RequestList />} />
           </Route>
-          <Route path="/headOfDepartment">
+          <Route
+            path="/headOfDepartment"
+            element={<PrivateRoute allowedRole={1} />}
+          >
             <Route index element={<HeadOfDepartmentHome />} />
             <Route path="myFyps" element={<HoDMyFyp />} />
             <Route path="newfyp" element={<HoDnewFyp />} />
             <Route path="requests" element={<HoDrequests />} />
           </Route>
-          <Route path="/professor">
+          <Route path="/professor" element={<PrivateRoute allowedRole={2} />}>
             <Route index element={<ProfessorHome />} />
             <Route path="myFyps" element={<ProfessorMyFyp />} />
             <Route path="newfyp" element={<NewFyp />} />
@@ -54,7 +58,7 @@ function App() {
             <Route path="profile" element={<ProfessorProfile />} />
             <Route path="password" element={<PasswordProf />} />
           </Route>
-          <Route path="/student">
+          <Route path="/student" element={<PrivateRoute allowedRole={3} />}>
             <Route index element={<StudentHome />} />
             <Route path="requestsList" element={<RequestsList />} />
             <Route path="fyps" element={<StudentFyp />} />
