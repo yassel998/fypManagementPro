@@ -22,18 +22,17 @@ import HoDMyFyp from "./headOfDepartment/myFyp/HoDMyFyp";
 import HoDnewFyp from "./headOfDepartment/newFyp/HoDnewFyp";
 import HoDrequests from "./headOfDepartment/requests/HoDrequests";
 import PrivateRoute from "./assets/PrivateRoute";
+import NotFound from "./notFound/NotFound";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-            <Route index element={<Login />} />
-          </Route>
-          <Route path="/register">
-            <Route index element={<Register />} />
-          </Route>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/*" element={<NotFound />} />
+
           <Route path="/supervisor" element={<PrivateRoute allowedRole={0} />}>
             <Route index element={<AdminHome />} />
             <Route path="headOfDeptList" element={<HeadOfDeptList />} />
@@ -41,6 +40,7 @@ function App() {
             <Route path="studentList" element={<StudnetList />} />
             <Route path="requestList" element={<RequestList />} />
           </Route>
+
           <Route
             path="/headOfDepartment"
             element={<PrivateRoute allowedRole={1} />}
@@ -50,6 +50,7 @@ function App() {
             <Route path="newfyp" element={<HoDnewFyp />} />
             <Route path="requests" element={<HoDrequests />} />
           </Route>
+
           <Route path="/professor" element={<PrivateRoute allowedRole={2} />}>
             <Route index element={<ProfessorHome />} />
             <Route path="myFyps" element={<ProfessorMyFyp />} />
@@ -58,6 +59,7 @@ function App() {
             <Route path="profile" element={<ProfessorProfile />} />
             <Route path="password" element={<PasswordProf />} />
           </Route>
+
           <Route path="/student" element={<PrivateRoute allowedRole={3} />}>
             <Route index element={<StudentHome />} />
             <Route path="requestsList" element={<RequestsList />} />
