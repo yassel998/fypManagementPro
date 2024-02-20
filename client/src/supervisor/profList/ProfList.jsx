@@ -37,11 +37,7 @@ const ProfList = () => {
       confirmButtonText: "Oui, supprimer",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          "Supprimé!",
-          "Le professeur a été supprimé.",
-          "success"
-        );
+        Swal.fire("Supprimé!", "Le professeur a été supprimé.", "success");
         // Add your logic for deletion here
       }
     });
@@ -114,6 +110,8 @@ const ProfList = () => {
           rows={userRows}
           title={"Les Professeurs-es"}
           slug={"Professeur-e"}
+          add={true}
+          role={2}
         />
       </div>
     </div>

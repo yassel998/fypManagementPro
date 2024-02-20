@@ -115,6 +115,7 @@ const HeadOfDeptList = () => {
           title={"Les Chefs de Départements"}
           slug={"Chef de Département"}
           add={true}
+          role={1}
         />
       </div>
     </div>

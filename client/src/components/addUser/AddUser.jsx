@@ -1,10 +1,67 @@
 import "./addUser.scss";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Select from "react-select";
 
-const AddUser = ({ setOpen, slug }) => {
-  const handleSubmit = (e) => {
+const AddUser = ({ setOpen, slug, role }) => {
+  // fetches the list of faculties from the backend
+  const [faculty, setFaculty] = useState([]);
+  // State to track the selected option
+  const [selectedFaculty, setSelectedFaculty] = useState(null);
+
+  useEffect(() => {
+    const fetchFaculties = async () => {
+      try {
+        const res = await axios.get("/faculties");
+        setFaculty(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchFaculties();
+  }, []);
+
+  // transform the 'faculty' array into a format suitable for 'react-select'.
+  const faculties =
+    faculty.length > 0
+      ? faculty.map((f) => ({
+          value: f.id_filiere,
+          label: f.filiere,
+        }))
+      : [];
+
+  // Handler for when an option is selected
+  const handleFacultyChange = (selectedOption) => {
+    setSelectedFaculty(selectedOption.value);
+    // Update faculty field in inputs state.
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      filiere: selectedOption.value,
+    }));
+  };
+
+  // initializes state to manage form inputs
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    filiere: selectedFaculty,
+    role: role,
+  });
+
+  // update form input values based on user input
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //add new item
+    try {
+      await axios.post("/users/createMember", inputs);
+    } catch (err) {
+      console.log(err);
+    }
 
     setOpen(false);
   };
@@ -18,15 +75,33 @@ const AddUser = ({ setOpen, slug }) => {
         <form onSubmit={handleSubmit}>
           <div className="item">
             <label>Email</label>
-            <input type="email" placeholder="email@gmail.com" />
+            <input
+              type="email"
+              placeholder="email@gmail.com"
+              name="email"
+              onChange={handleChange}
+            />
           </div>
           <div className="item">
-            <label>password</label>
-            <input type="string" placeholder="password" />
+            <label>Mot de passe</label>
+            <input
+              type="string"
+              placeholder="*******"
+              name="password"
+              onChange={handleChange}
+            />
           </div>
           <div className="item">
             <label> Département</label>
-            <input type="string" placeholder="test" />
+            <Select
+              options={faculties}
+              menuPlacement="top"
+              placeholder="Sélectionnez votre filière"
+              value={faculties.find(
+                (faculty) => faculty.value === selectedFaculty
+              )}
+              onChange={handleFacultyChange}
+            />
           </div>
           <button>Ajouter</button>
         </form>

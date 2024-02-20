@@ -4,7 +4,7 @@ import AddUser from "../../components/addUser/AddUser.jsx";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Datatable = ({ columns, rows, title, slug, add, addfyp, path }) => {
+const Datatable = ({ columns, rows, title, slug, add, addfyp, path, role }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="datatable">
@@ -20,8 +20,8 @@ const Datatable = ({ columns, rows, title, slug, add, addfyp, path }) => {
             <Link
               style={{
                 textDecoration: "none",
-                color: "inherit", // Use the default color
-                padding: "inherit", // Use the default padding
+                color: "inherit",
+                padding: "inherit",
               }}
               to={path}
             >
@@ -41,7 +41,7 @@ const Datatable = ({ columns, rows, title, slug, add, addfyp, path }) => {
         pageSizeOptions={[5, 9]}
         // checkboxSelection
       />
-      {open && <AddUser setOpen={setOpen} slug={slug} />}
+      {open && <AddUser role={role} setOpen={setOpen} slug={slug} />}
     </div>
   );
 };
