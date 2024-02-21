@@ -4,6 +4,8 @@ import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
 import { userRows } from "../../assets/data.js";
 import Swal from "sweetalert2";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const HeadOfDeptList = () => {
   async function handleRoleChange() {
@@ -116,6 +118,19 @@ const HeadOfDeptList = () => {
           slug={"Chef de Département"}
           add={true}
           role={1}
+        />
+        {/* notification for Account created successfully!  */}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
         />
       </div>
     </div>

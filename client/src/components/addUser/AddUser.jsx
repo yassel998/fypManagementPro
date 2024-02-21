@@ -2,6 +2,8 @@ import "./addUser.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Select from "react-select";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddUser = ({ setOpen, slug, role }) => {
   // fetches the list of faculties from the backend
@@ -59,6 +61,17 @@ const AddUser = ({ setOpen, slug, role }) => {
 
     try {
       await axios.post("/users/createMember", inputs);
+      // notification for Account created successfully!
+      toast.success("Compte créé avec succès !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     } catch (err) {
       console.log(err);
     }
