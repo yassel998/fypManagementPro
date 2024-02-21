@@ -61,7 +61,7 @@ const AddUser = ({ setOpen, slug, role }) => {
 
     try {
       await axios.post("/users/createMember", inputs);
-      // notification for Account created successfully!
+      // ntrotification for Account created successfully!
       toast.success("Compte créé avec succès !", {
         position: "top-right",
         autoClose: 5000,

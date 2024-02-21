@@ -4,6 +4,8 @@ import Navbar from "../../components/navbar/Navbar.jsx";
 import Datatable from "../../components/datatable/Datatable.jsx";
 import { userRows } from "../../assets/data.js";
 import Swal from "sweetalert2";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProfList = () => {
   async function handleRoleChange() {
@@ -112,6 +114,19 @@ const ProfList = () => {
           slug={"Professeur-e"}
           add={true}
           role={2}
+        />
+         {/* notification for Account created successfully!  */}
+         <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
         />
       </div>
     </div>
