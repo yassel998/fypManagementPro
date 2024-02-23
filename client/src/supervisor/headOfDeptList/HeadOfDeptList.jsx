@@ -2,13 +2,40 @@ import "./headOfDept.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Datatable from "../../components/datatable/Datatable";
-import { userRows } from "../../assets/data.js";
 import Swal from "sweetalert2";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 const HeadOfDeptList = () => {
-  async function handleRoleChange() {
+  // fetching the list of head of departments
+  const [chefDepList, setChefDepList] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    axios
+      .get("/users/allChefDep")
+      .then((response) => {
+        if (mounted) {
+          setChefDepList(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "There was an error fetching the department heads:",
+          error
+        );
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  console.log(chefDepList);
+
+  async function handleRoleChange(userId) {
     const { value: accept } = await Swal.fire({
       title: "Changer le rôle",
       text: "Êtes-vous sûr de vouloir changer le rôle de chef de département à professeur?",
@@ -20,9 +47,25 @@ const HeadOfDeptList = () => {
       confirmButtonText: "Oui, changer le rôle",
     });
 
+    // if (accept) {
+    //   Swal.fire("Vous avez accepté de changer le rôle :)");
+    //   // Add your logic for role change here
+    // }
     if (accept) {
-      Swal.fire("Vous avez accepté de changer le rôle :)");
-      // Add your logic for role change here
+      const newRole = 2; // Assuming '2' is the ID for 'professeur'
+      axios
+        .post("/api/changeUserRole", {
+          userId,
+          newRole,
+        })
+        .then(function (response) {
+          Swal.fire("Le rôle a été changé avec succès!");
+          // Handle further actions after the role change, such as refreshing data on the page
+        })
+        .catch(function (error) {
+          console.log(error);
+          Swal.fire("Erreur lors du changement de rôle.");
+        });
     }
   }
 
@@ -53,7 +96,7 @@ const HeadOfDeptList = () => {
     {
       field: "user",
       headerName: "Chefs de Département",
-      width: 240,
+      width: 220,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
@@ -64,10 +107,10 @@ const HeadOfDeptList = () => {
       },
     },
     {
-      field: "departmentName",
+      field: "filiereName",
       headerName: "Nom du Département",
       type: "string",
-      width: 190,
+      width: 210,
     },
     {
       field: "email",
@@ -113,7 +156,7 @@ const HeadOfDeptList = () => {
         <Navbar />
         <Datatable
           columns={userColumns}
-          rows={userRows}
+          rows={chefDepList}
           title={"Les Chefs de Départements"}
           slug={"Chef de Département"}
           add={true}
