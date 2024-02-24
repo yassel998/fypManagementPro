@@ -11,15 +11,15 @@ import { useState, useEffect } from "react";
 const HeadOfDeptList = () => {
   // fetching the list of head of departments
   const [chefDepList, setChefDepList] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
+  const fetchChefDepList = () => {
     axios
-      .get("/users/allChefDep")
+      .get("/users/allUsers", {
+        params: {
+          role: 1,
+        },
+      })
       .then((response) => {
-        if (mounted) {
-          setChefDepList(response.data);
-        }
+        setChefDepList(response.data);
       })
       .catch((error) => {
         console.error(
@@ -27,15 +27,13 @@ const HeadOfDeptList = () => {
           error
         );
       });
+  };
 
-    return () => {
-      mounted = false;
-    };
+  useEffect(() => {
+    fetchChefDepList();
   }, []);
 
-  console.log(chefDepList);
-
-  async function handleRoleChange(userId) {
+  const handleRoleChange = async (userId) => {
     const { value: accept } = await Swal.fire({
       title: "Changer le rôle",
       text: "Êtes-vous sûr de vouloir changer le rôle de chef de département à professeur?",
@@ -47,27 +45,27 @@ const HeadOfDeptList = () => {
       confirmButtonText: "Oui, changer le rôle",
     });
 
-    // if (accept) {
-    //   Swal.fire("Vous avez accepté de changer le rôle :)");
-    //   // Add your logic for role change here
-    // }
     if (accept) {
-      const newRole = 2; // Assuming '2' is the ID for 'professeur'
+      const newRole = 2;
       axios
-        .post("/api/changeUserRole", {
-          userId,
-          newRole,
-        })
+        .put("/users/changeRole", { userId, newRole })
         .then(function (response) {
-          Swal.fire("Le rôle a été changé avec succès!");
-          // Handle further actions after the role change, such as refreshing data on the page
+          Swal.fire({
+            title: "Le rôle a été changé avec succès!",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              fetchChefDepList(); // Re-fetch the list after the role change
+            }
+          });
         })
         .catch(function (error) {
           console.log(error);
           Swal.fire("Erreur lors du changement de rôle.");
         });
     }
-  }
+  };
 
   //delete
   const handleDeletion = () => {
@@ -110,13 +108,13 @@ const HeadOfDeptList = () => {
       field: "filiereName",
       headerName: "Nom du Département",
       type: "string",
-      width: 210,
+      width: 310,
     },
     {
       field: "email",
       headerName: "Email",
       type: "string",
-      width: 190,
+      width: 210,
     },
     {
       field: "phone",
@@ -125,19 +123,16 @@ const HeadOfDeptList = () => {
       width: 120,
     },
     {
-      field: "creationDate",
-      headerName: "Créé à",
-      type: "string",
-      width: 110,
-    },
-    {
       field: "action",
       headerName: "Action",
       width: 170,
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <div className="changeButton" onClick={handleRoleChange}>
+            <div
+              className="changeButton"
+              onClick={() => handleRoleChange(params.row.id)}
+            >
               Changer
             </div>
             <div className="deleteButton" onClick={handleDeletion}>

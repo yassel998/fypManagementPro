@@ -32,7 +32,7 @@ export const createFacultyMember = (req, res) => {
   });
 };
 
-//list of hod
+//list of users(hod & professors)
 export const getAllHeadsOfDepartments = (req, res) => {
   const token = req.cookies.access_token;
   if (!token) {
@@ -44,14 +44,16 @@ export const getAllHeadsOfDepartments = (req, res) => {
       return res.status(403).json("Token is not valid!");
     }
 
+    const role = req.query.role;
+
     const query = `
-      SELECT users.*, filieres.filiere AS filiereName 
+      SELECT users.id, users.firstName, users.lastName, users.email,users.phone, filieres.filiere AS filiereName 
       FROM users 
       JOIN filieres ON users.filiere = filieres.id_filiere 
-      WHERE users.role = 1
+      WHERE users.role = ?
     `;
 
-    db.query(query, (error, results) => {
+    db.query(query, role, (error, results) => {
       if (error) {
         return res.status(500).json(error);
       }
