@@ -97,3 +97,15 @@ export const changeUserRole = (req, res) => {
     });
   });
 };
+
+//  handle deletion of a user
+export const deleteUser = (req, res) => {
+  const id = req.params.id;
+  db.query("DELETE FROM users WHERE id = ?", id, (err, result) => {
+    if (err) {
+      console.error("Error deleting user:", err);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+    res.json({ message: "User successfully deleted" });
+  });
+};

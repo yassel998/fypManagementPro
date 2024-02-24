@@ -68,9 +68,9 @@ const HeadOfDeptList = () => {
   };
 
   //delete
-  const handleDeletion = () => {
+  const handleDeletion = (userId) => {
     Swal.fire({
-      title: "Êtes vous sûr?",
+      title: "Êtes-vous sûr?",
       text: "Vous ne pourrez pas revenir en arrière!",
       icon: "warning",
       showCancelButton: true,
@@ -80,15 +80,28 @@ const HeadOfDeptList = () => {
       confirmButtonText: "Oui, supprimer",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire(
-          "Supprimé!",
-          "Le chef de département a été supprimé.",
-          "success"
-        );
-        // Add your logic for deletion here
+        axios
+          .delete(`/users/deleteUser/${userId}`)
+          .then((response) => {
+            Swal.fire(
+              "Supprimé!",
+              "Le chef de département a été supprimé.",
+              "success"
+            );
+            fetchChefDepList();
+          })
+          .catch((error) => {
+            console.error("Error deleting user:", error);
+            Swal.fire(
+              "Erreur!",
+              "Une erreur s'est produite lors de la suppression.",
+              "error"
+            );
+          });
       }
     });
   };
+
   const userColumns = [
     // { field: "id", headerName: "ID", width: 70 },
     {
@@ -135,7 +148,10 @@ const HeadOfDeptList = () => {
             >
               Changer
             </div>
-            <div className="deleteButton" onClick={handleDeletion}>
+            <div
+              className="deleteButton"
+              onClick={() => handleDeletion(params.row.id)}
+            >
               Supprimer
             </div>
           </div>
