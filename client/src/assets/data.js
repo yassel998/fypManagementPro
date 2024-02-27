@@ -233,6 +233,7 @@ export const widgetsData = {
   headOfDeptSup: {
     title: "Chefs Dpt",
     counter: 19,
+    go: "/supervisor/headOfDeptList",
     link: "Voir tous les chefs de département",
     icon: (
       <AccountBalanceIcon
@@ -247,6 +248,7 @@ export const widgetsData = {
   SupProf: {
     title: "Professeurs-es",
     counter: 235,
+    go: "/supervisor/profList",
     link: "Voir tous les professeurs-es",
     icon: (
       <SchoolIcon

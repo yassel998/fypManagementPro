@@ -2,6 +2,7 @@ import "./widget.scss";
 import { widgetsData } from "../../assets/data";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   const data = widgetsData[type];
@@ -35,7 +36,11 @@ const Widget = ({ type }) => {
       <div className="left">
         <div className="title">{data.title}</div>
         <div className="counter">{count}</div>
-        <div className="link">{data.link}</div>
+        <div className="link">
+          <Link to={data.go} style={{ textDecoration: "none" }}>
+            {data.link}
+          </Link>
+        </div>
       </div>
       <div className="right">{data.icon}</div>
     </div>
